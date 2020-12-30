@@ -1,0 +1,67 @@
+{
+  "name": "user",
+  "version": "1.0.0",
+  "main": "main.js",
+  "description": "description APP",
+  "author": {
+    "name": "abdalah",
+    "email": "abdalahshaban@yahoo.com"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app.js",
+    "start:electron": "electron .",
+    "electron": "tsc -p tsconfig.serve.json && electron .",
+    "build:electron": "rm -rf app-exe && rm -rf win-build  && tsc -p tsconfig.serve.json && electron-builder && node build.js"
+  },
+  "build": {
+    "appId": "com.ISEC.app",
+    "productName": "user",
+    "directories": {
+      "output": "./win-build"
+    },
+    "compression": "normal",
+    "win": {
+      "icon": "./assets/img/login.ico",
+      "artifactName": "user",
+      "target": [
+        {
+          "target": "msi"
+        }
+      ]
+    },
+    "nsis": {
+      "perMachine": true,
+      "oneClick": false,
+      "allowElevation": false
+    },
+    "msi": {
+      "perMachine": false,
+      "oneClick": false
+    }
+  },
+  "keywords": [],
+  "license": "ISCE",
+  "dependencies": {
+    "auto-launch": "^5.0.5",
+    "axios": "^0.21.1",
+    "cookie-parser": "^1.4.5",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "graphene-pk11": "^2.2.1",
+    "morgan": "^1.10.0",
+    "usb-detection": "^4.10.0"
+  },
+  "devDependencies": {
+    "@bitdisaster/exe-icon-extractor": "^1.0.10",
+    "@electron-forge/cli": "^6.0.0-beta.54",
+    "@electron-forge/maker-squirrel": "^6.0.0-beta.54",
+    "@electron-forge/maker-wix": "^6.0.0-beta.54",
+    "electron": "^11.0.3",
+    "electron-builder": "^22.9.1",
+    "electron-packager": "^15.2.0",
+    "electron-rebuild": "^2.3.2",
+    "electron-wix-msi": "^3.0.4",
+    "path": "^0.12.7"
+  }
+}
