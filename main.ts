@@ -37,7 +37,7 @@ function createWindow() {
     });
 
 
-    mainWindow.loadURL('http://localhost:3000');
+    mainWindow.loadURL('http://127.0.0.1:4000');
     mainWindow.hide();
     initTray();
 
@@ -54,7 +54,7 @@ function initTray() {
                 /**
                  * @desc send request to localhost to set date in token
                  */
-                axios.post('http://127.0.0.1:3000/api/token/login', { pin: "11112222" })
+                axios.post('http://127.0.0.1:4000/api/token/login', { pin: "11112222" })
 
             }
         },

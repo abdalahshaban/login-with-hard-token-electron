@@ -1,5 +1,5 @@
 {
-  "name": "user",
+  "name": "user_driver",
   "version": "1.0.0",
   "main": "main.js",
   "description": "description APP",
@@ -9,34 +9,31 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "postinstall": "electron-builder install-app-deps",
     "start": "nodemon app.js",
     "start:electron": "electron .",
     "electron": "tsc -p tsconfig.serve.json && electron .",
-    "build:electron": "rm -rf app-exe && rm -rf win-build  && tsc -p tsconfig.serve.json && electron-builder && node build.js"
+    "build:electron": "rm -rf app-exe && rm -rf win-build  && tsc -p tsconfig.serve.json && electron-builder && node wix.js",
+    "node:build": "rm -rf app-exe && rm -rf win-build  && tsc -p tsconfig.serve.json && node build.js && node wix.js"
   },
   "build": {
     "appId": "com.ISEC.app",
-    "productName": "user",
+    "productName": "User Driver",
     "directories": {
       "output": "./win-build"
     },
     "compression": "normal",
     "win": {
       "icon": "./assets/img/login.ico",
-      "artifactName": "user",
+      "artifactName": "User Driver",
       "target": [
         {
           "target": "msi"
         }
       ]
     },
-    "nsis": {
-      "perMachine": true,
-      "oneClick": false,
-      "allowElevation": false
-    },
     "msi": {
-      "perMachine": false,
+      "perMachine": true,
       "oneClick": false
     }
   },

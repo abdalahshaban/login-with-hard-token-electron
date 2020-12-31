@@ -8,7 +8,8 @@ usbDetect.startMonitoring()
  * @return bool - success or failure
  */
 module.exports = async function login(req, res) {
-  let mod
+  var mod
+  let dllPath
   try {
     /**
      *
@@ -24,13 +25,14 @@ module.exports = async function login(req, res) {
      *
      * @return bool - success or failure in get device
      */
-    if (device.length === 0) return res.status(400).json({ success: false })
+    if (device.length === 0) return res.status(400).json({ device })
     /**
      *
      * @desc — load dll library from lib folder
      */
-    let dllPath = path.join(__dirname, `../../../lib/eps2003csp11.dll`)
-    mod = graphene.Module.load(dllPath)
+    dllPath = path.join(process.resourcesPath, 'lib', 'eps2003csp11.dll') //for production
+    // dllPath = path.join(__dirname, '../../../lib/eps2003csp11.dll') // for development
+    let mod = graphene.Module.load(dllPath)
     /**
      *
      * @desc — initialize lib to use it after
@@ -47,7 +49,7 @@ module.exports = async function login(req, res) {
      */
     if (!slots.length) {
       mod.finalize()
-      return res.status(400).json({ success: false })
+      return res.status(400).json({ slots: slots.length })
     }
     /**
      * @desc — USING FIRST SLOT
@@ -79,7 +81,9 @@ module.exports = async function login(req, res) {
       .toType()
 
     if (!isecSession) {
-      return res.status(400).json({ success: false })
+      return res
+        .status(400)
+        .json({ token: 'this token not belong to this app' })
     }
     // console.log(JSON.parse(isecSession.value.toString()), 'isecSession')
     /**
@@ -90,10 +94,11 @@ module.exports = async function login(req, res) {
 
     mod.finalize()
 
-    return res.status(200).json({ message: true })
+    return res.status(200).json({ message: 'pin correct' })
   } catch (error) {
-
-    mod.finalize()
-    return res.status(400).json({ message: false })
+    if (mod) {
+      mod.finalize()
+    }
+    return res.status(400).json({ message: error })
   }
 }
