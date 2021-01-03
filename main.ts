@@ -7,6 +7,12 @@ const AutoLaunch = require('auto-launch');
 let tray: Tray = null;
 let mainWindow: BrowserWindow = null;
 
+// Enable live reload for Electron too
+require('electron-reload')(__dirname, {
+    // Note that the path to electron may vary according to the main file
+    electron: require(`${__dirname}/node_modules/electron`)
+});
+
 const gotTheLock = app.requestSingleInstanceLock();
 
 if (!gotTheLock) {

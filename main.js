@@ -43,6 +43,11 @@ var server = require('./app.js');
 var AutoLaunch = require('auto-launch');
 var tray = null;
 var mainWindow = null;
+// Enable live reload for Electron too
+require('electron-reload')(__dirname, {
+    // Note that the path to electron may vary according to the main file
+    electron: require(__dirname + "/node_modules/electron")
+});
 var gotTheLock = electron_1.app.requestSingleInstanceLock();
 if (!gotTheLock) {
     electron_1.app.quit();
@@ -56,28 +61,7 @@ else {
             mainWindow.focus();
         }
     });
-    // Create win, load the rest of the app, etc...
-    // app.whenReady().then(() => {
-    //     let autoLaunch = new AutoLaunch({
-    //         name: 'userDriver',
-    //     });
-    //     autoLaunch.isEnabled().then((isEnabled) => {
-    //         if (!isEnabled) autoLaunch.enable();
-    //     });
-    //     createWindow()
-    // });
     electron_1.app.on('ready', function () {
-        // let autoLaunch = new AutoLaunch({
-        //     name: 'userDriver',
-        //     isHidden: true
-        // });
-        // autoLaunch.enable();
-        // autoLaunch.isEnabled().then((isEnabled) => {
-        //     if (isEnabled) return;
-        //     autoLaunch.enable();
-        // }).catch(function (err) {
-        //     // handle error
-        // });
         electron_1.app.setLoginItemSettings({
             openAtLogin: true,
             enabled: true,

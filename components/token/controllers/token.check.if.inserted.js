@@ -15,9 +15,9 @@ module.exports = async function checkTokenApi(req, res) {
     }
     return res.status(200).json({ message })
   } catch (error) {
-    if (mod) {
-      mod.finalize()
-    }
+    // if (mod) {
+    //   mod.finalize()
+    // }
     return res.status(400).json({ message: error })
   }
 }
