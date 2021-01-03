@@ -14,9 +14,9 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use(cookieParser('some_secret_1234'))
 
-// app.get('/', (req, res) => {
-//   return res.json({ message: 'Wellcome to Drive ' })
-// })
+app.get('/', (req, res) => {
+  return res.json({ message: 'Wellcome to Drive ' })
+})
 //router
 app.use('/api', tokenAPI)
 

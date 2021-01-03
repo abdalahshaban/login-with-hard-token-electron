@@ -13,7 +13,7 @@
     "start": "nodemon app.js",
     "start:electron": "electron .",
     "electron": "tsc -p tsconfig.serve.json && electron .",
-    "build:electron": "rm -rf app-exe && rm -rf win-build  && tsc -p tsconfig.serve.json && electron-builder && node wix.js",
+    "build:electron": "rm -rf app-exe && rm -rf win-build  && tsc -p tsconfig.serve.json && node build.js",
     "node:build": "rm -rf app-exe && rm -rf win-build  && tsc -p tsconfig.serve.json && node build.js && node wix.js"
   },
   "build": {

@@ -1,7 +1,9 @@
 const login = require('./token.login')
-const checkToken = require('./token.check.if.inserted')
+const checkTokenApi = require('./token.check.if.inserted')
+const getPublicKey = require('./token.send.publicKey')
 
 module.exports = {
   login,
-  checkToken,
+  checkTokenApi,
+  getPublicKey
 }

@@ -1,9 +1,10 @@
 const express = require('express')
-const { login, checkToken } = require('./controllers')
+const { login, checkTokenApi, getPublicKey } = require('./controllers')
 
 const router = express.Router()
 
+router.post('/token/check', checkTokenApi)
 router.post('/token/login', login)
-router.get('/token/check', checkToken)
+router.post('/token/get-public-key', getPublicKey)
 
 module.exports = router

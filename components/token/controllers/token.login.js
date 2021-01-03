@@ -1,15 +1,12 @@
 const graphene = require('graphene-pk11')
-const usbDetect = require('usb-detection')
-const path = require('path')
-usbDetect.startMonitoring()
+const checkTokenInserted = require('../shared/check.token')
+
 /**
  * @desc — login with `token`
  *
  * @return bool - success or failure
  */
 module.exports = async function login(req, res) {
-  var mod
-  let dllPath
   try {
     /**
      *
@@ -20,36 +17,9 @@ module.exports = async function login(req, res) {
      *
      * @desc — check if token plugin or not using productId: 2055 && vendorId: 2414
      */
-    let device = await usbDetect.find(2414, 2055)
-    /**
-     *
-     * @return bool - success or failure in get device
-     */
-    if (device.length === 0) return res.status(400).json({ device })
-    /**
-     *
-     * @desc — load dll library from lib folder
-     */
-    dllPath = path.join(process.resourcesPath, 'lib', 'eps2003csp11.dll') //for production
-    // dllPath = path.join(__dirname, '../../../lib/eps2003csp11.dll') // for development
-    let mod = graphene.Module.load(dllPath)
-    /**
-     *
-     * @desc — initialize lib to use it after
-     */
-    mod.initialize()
-    /**
-     *
-     * @desc — GET TOKEN SLOTS
-     */
-    const slots = mod.getSlots()
-    /**
-     *
-     * @return List of Slots is Empty IF NO SLOTS
-     */
-    if (!slots.length) {
-      mod.finalize()
-      return res.status(400).json({ slots: slots.length })
+    let { message, inserted, mod } = await checkTokenInserted()
+    if (!inserted) {
+      return res.status(400).json({ message })
     }
     /**
      * @desc — USING FIRST SLOT
@@ -85,20 +55,14 @@ module.exports = async function login(req, res) {
         .status(400)
         .json({ token: 'this token not belong to this app' })
     }
-    // console.log(JSON.parse(isecSession.value.toString()), 'isecSession')
     /**
      *
      *@desc —close session btw token & application
      */
-    session.close()
-
     mod.finalize()
 
     return res.status(200).json({ message: 'pin correct' })
   } catch (error) {
-    if (mod) {
-      mod.finalize()
-    }
     return res.status(400).json({ message: error })
   }
 }

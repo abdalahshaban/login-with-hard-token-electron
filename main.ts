@@ -1,7 +1,8 @@
 import { app, Tray, Menu, BrowserWindow } from 'electron';
 import * as path from 'path';
-const axios = require('axios')
+const axios = require('axios').default
 const server = require('./app.js');
+const AutoLaunch = require('auto-launch');
 
 let tray: Tray = null;
 let mainWindow: BrowserWindow = null;
@@ -20,8 +21,13 @@ if (!gotTheLock) {
         }
     });
 
-    // Create win, load the rest of the app, etc...
-    app.whenReady().then(createWindow);
+    app.on('ready', () => {
+        app.setLoginItemSettings({
+            openAtLogin: true,
+            enabled: true,
+        })
+        createWindow()
+    })
 }
 
 function createWindow() {
@@ -50,12 +56,22 @@ function initTray() {
     const contextMenu = Menu.buildFromTemplate([
         {
             label: 'login',
-            click: () => {
+            click: async () => {
                 /**
                  * @desc send request to localhost to set date in token
                  */
-                axios.post('http://127.0.0.1:4000/api/token/login', { pin: "11112222" })
+                let checkedToken = await axios.post('http://127.0.0.1:4000/api/token/check', {})
+                // console.log(checkedToken);
+                if (!checkedToken) return 'no token insertd';
 
+                let loginToken = await axios.post('http://127.0.0.1:4000/api/token/login', { pin: "11112222" })
+                // console.log(loginToken);
+                if (!loginToken) return 'error in login token';
+
+                let getPublicKey = await axios.post('http://127.0.0.1:4000/api/token/get-public-key', { pin: "11112222" })
+                // console.log(getPublicKey);
+                if (!getPublicKey) return 'error in getPublicKey';
+                return
             }
         },
         {

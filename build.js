@@ -42,9 +42,9 @@ builder
       // },
       msi: {
         oneClick: false,
-        perMachine: true,
+        perMachine: false,
         // createStartMenuShortcut: true,
-        // allowToChangeInstallationDirectory: true,
+        allowToChangeInstallationDirectory: true,
         // deleteAppDataOnUninstall: true,
       },
       appx: {
