@@ -40,14 +40,13 @@ var electron_1 = require("electron");
 var path = require("path");
 var axios = require('axios').default;
 var server = require('./app.js');
-var AutoLaunch = require('auto-launch');
 var tray = null;
 var mainWindow = null;
 // Enable live reload for Electron too
-require('electron-reload')(__dirname, {
-    // Note that the path to electron may vary according to the main file
-    electron: require(__dirname + "/node_modules/electron")
-});
+// require('electron-reload')(__dirname, {
+//     // Note that the path to electron may vary according to the main file
+//     electron: require(`${__dirname}/node_modules/electron`)
+// });
 var gotTheLock = electron_1.app.requestSingleInstanceLock();
 if (!gotTheLock) {
     electron_1.app.quit();

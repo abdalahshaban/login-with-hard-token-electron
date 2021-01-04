@@ -31,7 +31,11 @@ const path = require('path')
       autoLaunch: true,
     },
     // defaultInstallMode: 'perUser',
-    extensions: ['WixUtilExtension', 'WixUIExtension'],
+    extensions: ['WixUIExtension', 'WixUtilExtension', 'WixNetFxExtension'],
+    // extensions: [
+    //   'WixUtilExtension',
+    //   'C:Program Files (x86)WiX Toolset v3.11\binWixUtilExtension.dll',
+    // ],
   })
 
   // Step 2: Create a .wxs template file

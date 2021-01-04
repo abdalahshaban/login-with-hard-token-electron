@@ -15,16 +15,11 @@ builder
       win: {
         icon: './assets/img/login.ico',
         artifactName: 'userDriver',
-        // target: 'msi',
-        target: [
-          {
-            target: 'msi',
-          },
-        ],
-        requestedExecutionLevel: 'requireAdministrator',
+        target: 'msi',
         // compression: 'maximum',
       },
       // nsis: {
+      //   include: path.join(__dirname, './installer.nsh'),
       //   oneClick: false,
       //   allowElevation: true,
       //   perMachine: true,

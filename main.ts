@@ -2,16 +2,15 @@ import { app, Tray, Menu, BrowserWindow } from 'electron';
 import * as path from 'path';
 const axios = require('axios').default
 const server = require('./app.js');
-const AutoLaunch = require('auto-launch');
 
 let tray: Tray = null;
 let mainWindow: BrowserWindow = null;
 
 // Enable live reload for Electron too
-require('electron-reload')(__dirname, {
-    // Note that the path to electron may vary according to the main file
-    electron: require(`${__dirname}/node_modules/electron`)
-});
+// require('electron-reload')(__dirname, {
+//     // Note that the path to electron may vary according to the main file
+//     electron: require(`${__dirname}/node_modules/electron`)
+// });
 
 const gotTheLock = app.requestSingleInstanceLock();
 
@@ -64,7 +63,7 @@ function initTray() {
             label: 'login',
             click: async () => {
                 /**
-                 * @desc send request to localhost to set date in token
+                 * @desc simulate send request to localhost 
                  */
                 let checkedToken = await axios.post('http://127.0.0.1:4000/api/token/check', {})
                 // console.log(checkedToken);
