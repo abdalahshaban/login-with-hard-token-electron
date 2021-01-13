@@ -89,29 +89,13 @@ function initTray() {
         {
             label: 'login',
             click: function () { return __awaiter(_this, void 0, void 0, function () {
-                var checkedToken, loginToken, getPublicKey;
+                var getPublicKey;
                 return __generator(this, function (_a) {
                     switch (_a.label) {
-                        case 0: return [4 /*yield*/, axios.post('http://127.0.0.1:4000/api/token/check', {})
-                            // console.log(checkedToken);
+                        case 0: return [4 /*yield*/, axios.post('http://127.0.0.1:4000/api/token/get-public-key', { pin: "11112222" })
+                            // console.log(getPublicKey);
                         ];
                         case 1:
-                            checkedToken = _a.sent();
-                            // console.log(checkedToken);
-                            if (!checkedToken)
-                                return [2 /*return*/, 'no token insertd'];
-                            return [4 /*yield*/, axios.post('http://127.0.0.1:4000/api/token/login', { pin: "11112222" })
-                                // console.log(loginToken);
-                            ];
-                        case 2:
-                            loginToken = _a.sent();
-                            // console.log(loginToken);
-                            if (!loginToken)
-                                return [2 /*return*/, 'error in login token'];
-                            return [4 /*yield*/, axios.post('http://127.0.0.1:4000/api/token/get-public-key', { pin: "11112222" })
-                                // console.log(getPublicKey);
-                            ];
-                        case 3:
                             getPublicKey = _a.sent();
                             // console.log(getPublicKey);
                             if (!getPublicKey)

@@ -19,7 +19,7 @@ module.exports = async function login(req, res) {
      */
     let { message, inserted, mod } = await checkTokenInserted()
     if (!inserted) {
-      return res.status(400).json({ message })
+      return res.status(201).json({ message, inserted })
     }
     /**
      * @desc — USING FIRST SLOT
@@ -42,23 +42,25 @@ module.exports = async function login(req, res) {
      *
      *@desc —get data from token using `label` & `application`
      */
-    let isecSession = session
-      .find({
-        application: 'ISEC',
-        label: 'data.address',
-      })
-      .items(0)
-      .toType()
+    // let isecSession = session
+    //   .find({
+    //     application: 'ISEC',
+    //     label: 'data.address',
+    //   })
+    //   .items(0)
+    //   .toType()
 
-    if (!isecSession) {
-      return res
-        .status(400)
-        .json({ token: 'this token not belong to this app' })
-    }
+    // if (!isecSession) {
+    //   return res
+    //     .status(400)
+    //     .json({ token: 'this token not belong to this app' })
+    // }
     /**
      *
      *@desc —close session btw token & application
      */
+    // session.logout()
+    session.close()
     mod.finalize()
 
     return res.status(200).json({ message: 'pin correct' })

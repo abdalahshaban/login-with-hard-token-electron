@@ -6,7 +6,7 @@ builder
   .build({
     targets: Platform.createTarget(),
     config: {
-      appId: 'com.ISEC.app',
+      appId: 'com.ISEC.userDriver',
       productName: 'userDriver',
       directories: {
         output: './win-build',
@@ -43,7 +43,7 @@ builder
       // },
       msi: {
         oneClick: false,
-        perMachine: false,
+        perMachine: true,
         createStartMenuShortcut: true,
       },
       appx: {

@@ -21,7 +21,11 @@ module.exports = async function checkToken() {
      * @return bool - success or failure in get device
      */
     if (device.length === 0)
-      return { message: 'device not insertd', inserted: false }
+      return {
+        message: `device not insertd device.length =${device.length}`,
+        inserted: false,
+      }
+
     /**
      *
      * @desc — load dll library from lib folder
@@ -45,14 +49,14 @@ module.exports = async function checkToken() {
      */
     if (!slots.length) {
       mod.finalize()
-      return { message: 'device not insertd', inserted: false }
+      return { message: 'slots.length', inserted: false }
     }
 
     return { message: 'device insertd', inserted: true, mod, slots }
   } catch (error) {
-    if (mod) {
-      mod.finalize()
-    }
-    return { message: 'device not insertd', inserted: false }
+    // if (mod) {
+    //   mod.finalize()
+    // }
+    return { message: error, inserted: false }
   }
 }

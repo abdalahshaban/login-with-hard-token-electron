@@ -2,6 +2,7 @@ const graphene = require('graphene-pk11')
 const checkTokenInserted = require('../shared/check.token')
 const crypto = require('crypto')
 /**
+ *
  * @desc - get `public key`
  * @return public key hashed
  */
@@ -43,10 +44,17 @@ module.exports = async function getPublicKey(req, res) {
       .items(0)
       .toType()
 
-    let data = JSON.stringify(publicKey)
-    let hashPk = crypto.createHash('md5').update(data).digest('hex')
+    let data = publicKey.getAttribute('modulus').toString('base64')
+    // let hashPk = crypto.createHash('md5').update(data).digest('hex')
+    /**
+     *
+     *@desc —close session btw token & application
+     */
+    session.close()
+    // session.logout()
+    mod.finalize()
 
-    return res.status(200).json({ publicKey: hashPk })
+    return res.status(200).json({ publicKey: data })
   } catch (error) {
     console.log(error)
     return res.status(400).json({ message: error })

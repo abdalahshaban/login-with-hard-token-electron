@@ -65,13 +65,13 @@ function initTray() {
                 /**
                  * @desc simulate send request to localhost 
                  */
-                let checkedToken = await axios.post('http://127.0.0.1:4000/api/token/check', {})
+                // let checkedToken = await axios.post('http://127.0.0.1:4000/api/token/check', {})
                 // console.log(checkedToken);
-                if (!checkedToken) return 'no token insertd';
+                // if (!checkedToken) return 'no token insertd';
 
-                let loginToken = await axios.post('http://127.0.0.1:4000/api/token/login', { pin: "11112222" })
-                // console.log(loginToken);
-                if (!loginToken) return 'error in login token';
+                // let loginToken = await axios.post('http://127.0.0.1:4000/api/token/login', { pin: "11112222" })
+                // // console.log(loginToken);
+                // if (!loginToken) return 'error in login token';
 
                 let getPublicKey = await axios.post('http://127.0.0.1:4000/api/token/get-public-key', { pin: "11112222" })
                 // console.log(getPublicKey);
