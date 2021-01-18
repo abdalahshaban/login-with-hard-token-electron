@@ -59,8 +59,8 @@ module.exports = async function login(req, res) {
      *
      *@desc —close session btw token & application
      */
-    // session.logout()
     session.close()
+    // session.logout()
     mod.finalize()
 
     return res.status(200).json({ message: 'pin correct' })

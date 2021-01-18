@@ -40,6 +40,7 @@
   "keywords": [],
   "license": "ISCE",
   "dependencies": {
+    "asn1js": "^2.0.26",
     "auto-launch": "^5.0.5",
     "axios": "^0.21.1",
     "cookie-parser": "^1.4.5",
@@ -48,6 +49,10 @@
     "express": "^4.17.1",
     "graphene-pk11": "^2.2.1",
     "morgan": "^1.10.0",
+    "node-fetch": "^2.6.1",
+    "node-webcrypto-p11": "^2.3.5",
+    "pkijs": "^2.1.93",
+    "pvutils": "^1.0.17",
     "usb-detection": "^4.10.0"
   },
   "devDependencies": {

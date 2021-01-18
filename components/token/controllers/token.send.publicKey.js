@@ -35,9 +35,10 @@ module.exports = async function getPublicKey(req, res) {
      *
      * @desc — OPEN SESSION WITH TOKEN USING PIN AND USER TYPE `USER`
      */
-    if (!session) {
-      session.login(pin, graphene.UserType.USER)
-    }
+    // if (!session) {
+    //   session.login(pin, graphene.UserType.USER)
+    // }
+    session.login(pin, graphene.UserType.USER)
 
     let publicKey = session
       .find({ class: graphene.ObjectClass.PUBLIC_KEY })

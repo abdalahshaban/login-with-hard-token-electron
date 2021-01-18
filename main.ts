@@ -73,9 +73,13 @@ function initTray() {
                 // // console.log(loginToken);
                 // if (!loginToken) return 'error in login token';
 
-                let getPublicKey = await axios.post('http://127.0.0.1:4000/api/token/get-public-key', { pin: "11112222" })
-                // console.log(getPublicKey);
-                if (!getPublicKey) return 'error in getPublicKey';
+                // let getPublicKey = await axios.post('http://127.0.0.1:4000/api/token/get-public-key', { pin: "11112222" })
+                // // console.log(getPublicKey);
+                // if (!getPublicKey) return 'error in getPublicKey';
+                // return
+                let getCert = await axios.post('http://127.0.0.1:4000/api/token/check-cer', { pin: "11112222" })
+                console.log(getCert.data);
+                if (!getCert) return 'error in getPublicKey';
                 return
             }
         },
