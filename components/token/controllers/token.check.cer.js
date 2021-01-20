@@ -14,6 +14,8 @@ const fetch = require('node-fetch')
  * @return bool - success or failure
  */
 module.exports = async function checkCer(req, res) {
+  let session
+  let mode
   try {
     /**
      *
@@ -32,12 +34,13 @@ module.exports = async function checkCer(req, res) {
      * @desc — USING FIRST SLOT
      *
      */
-    const slot = mod.getSlots(0)
+    mode = mod
+    const slot = mode.getSlots(0)
     /**
      *
      * @desc — PREPARE SESSION TO OPEN && ADD PERMISSION RW_SESSION
      */
-    const session = slot.open(
+    session = slot.open(
       graphene.SessionFlag.RW_SESSION | graphene.SessionFlag.SERIAL_SESSION,
     )
     /**
@@ -138,12 +141,18 @@ module.exports = async function checkCer(req, res) {
      */
     session.close()
     // session.logout()
-    mod.finalize()
+    mode.finalize()
 
     return res
       .status(200)
       .json({ message: 'this.validCertificates', certificate: true })
   } catch (error) {
+    if (session) {
+      session.close()
+    }
+    if (mode) {
+      mode.finalize()
+    }
     return res.status(400).json({ message: error })
   }
 }

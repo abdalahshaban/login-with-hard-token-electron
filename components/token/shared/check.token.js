@@ -30,8 +30,8 @@ module.exports = async function checkToken() {
      *
      * @desc — load dll library from lib folder
      */
-    dllPath = path.join(process.resourcesPath, 'lib', 'eps2003csp11.dll') //for production
-    // dllPath = path.join(__dirname, '../../../lib/eps2003csp11.dll') // for development
+    // dllPath = path.join(process.resourcesPath, 'lib', 'eps2003csp11.dll') //for production
+    dllPath = path.join(__dirname, '../../../lib/eps2003csp11.dll') // for development
     mod = graphene.Module.load(dllPath)
     /**
      *
@@ -48,7 +48,7 @@ module.exports = async function checkToken() {
      * @return List of Slots is Empty IF NO SLOTS
      */
     if (!slots.length) {
-      mod.finalize()
+      // mod.finalize()
       return { message: 'slots.length', inserted: false }
     }
 

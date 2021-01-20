@@ -77,10 +77,14 @@ function initTray() {
                 // // console.log(getPublicKey);
                 // if (!getPublicKey) return 'error in getPublicKey';
                 // return
-                let getCert = await axios.post('http://127.0.0.1:4000/api/token/check-cer', { pin: "11112222" })
-                console.log(getCert.data);
-                if (!getCert) return 'error in getPublicKey';
-                return
+                // let getCert = await axios.post('http://127.0.0.1:4000/api/token/check-cer', { pin: "11112222" })
+                // console.log(getCert.data);
+                // if (!getCert) return 'error in getPublicKey';
+                // return
+                let getWeb3Address = await axios.post('http://127.0.0.1:4000/api/token/get-web3-address', { pin: "11112222" })
+                console.log(getWeb3Address, 'data');
+                if (!getWeb3Address) return 'error in getWeb3Address';
+                return 'ojhjghgfgfygf'
             }
         },
         {

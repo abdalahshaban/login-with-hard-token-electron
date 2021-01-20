@@ -89,16 +89,16 @@ function initTray() {
         {
             label: 'login',
             click: function () { return __awaiter(_this, void 0, void 0, function () {
-                var getCert;
+                var getWeb3Address;
                 return __generator(this, function (_a) {
                     switch (_a.label) {
-                        case 0: return [4 /*yield*/, axios.post('http://127.0.0.1:4000/api/token/check-cer', { pin: "11112222" })];
+                        case 0: return [4 /*yield*/, axios.post('http://127.0.0.1:4000/api/token/get-web3-address', { pin: "11112222" })];
                         case 1:
-                            getCert = _a.sent();
-                            console.log(getCert.data);
-                            if (!getCert)
-                                return [2 /*return*/, 'error in getPublicKey'];
-                            return [2 /*return*/];
+                            getWeb3Address = _a.sent();
+                            console.log(getWeb3Address, 'data');
+                            if (!getWeb3Address)
+                                return [2 /*return*/, 'error in getWeb3Address'];
+                            return [2 /*return*/, 'ojhjghgfgfygf'];
                     }
                 });
             }); }
